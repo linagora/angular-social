@@ -8,7 +8,11 @@ angular.module("ngSocial").directive('ngSocialGithub', function() {
                 return data.data.watchers_count;
             }
         },
-        clickUrl: 'https://github.com/{user}/{repository}/'
+        popup: {
+            url: 'https://github.com/{user}/{repository}/',
+            width: screen.width,
+            height: screen.height
+        }
     };
     return {
         restrict: 'C',
@@ -17,7 +21,7 @@ angular.module("ngSocial").directive('ngSocialGithub', function() {
         replace: true,
         transclude: true,
         template: '<li> \
-                    <a ng-href="{{ctrl.link(options)}}" target="_blank" class="ng-social-button"> \
+                    <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" class="ng-social-button"> \
                         <span class="ng-social-icon"></span> \
                         <span class="ng-social-text" ng-transclude></span> \
                     </a> \
